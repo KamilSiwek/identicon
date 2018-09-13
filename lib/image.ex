@@ -9,7 +9,6 @@ defmodule Identicon.Image do
   ## Examples
       iex> %Identicon.Image{}
       %Identicon.Image{hex: nil}
-
   """
   defstruct hex: nil
 end

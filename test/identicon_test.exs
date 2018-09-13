@@ -4,10 +4,7 @@ defmodule IdenticonTest do
   doctest Identicon.Image
 
   test "Main" do
-    assert Identicon.main("abc") == %Identicon.Image{
-              hex: [144, 1, 80, 152, 60, 210, 79, 176, 214, 150, 63, 125, 40,
-               225, 127, 114]
-            }
+    assert Identicon.main("abc") == [144, 1, 80]
   end
 
   test "Hash's list" do
