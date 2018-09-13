@@ -8,7 +8,14 @@ defmodule Identicon do
 
   ## Examples
       iex> Identicon.main("abc")
-      [[144, 1, 80], [152, 60, 210], [79, 176, 214], [150, 63, 125], [40, 225, 127]]
+      [
+      [144, 1, 80, 1, 144],
+      [152, 60, 210, 60, 152],
+      [79, 176, 214, 176, 79],
+      [150, 63, 125, 63, 150],
+      [40, 225, 127, 225, 40]
+      ]
+
   """
   def main(input) do
     input |> hash_input |> pick_color |> build_grid
@@ -27,7 +34,6 @@ defmodule Identicon do
   """
   def hash_input(input) do
     hex = :crypto.hash(:md5, input) |> :binary.bin_to_list
-
     %Identicon.Image{hex: hex}
   end
 
@@ -37,7 +43,6 @@ defmodule Identicon do
   def pick_color(image) do
     # Change hex_list to [r, g, b | _tail] in {hex: hex_list}
     %Identicon.Image{hex: [r, g, b | _tail]} = image
-
     %Identicon.Image{image | color: {r, g, b}}
   end
 
@@ -48,10 +53,21 @@ defmodule Identicon do
       iex> image = %Identicon.Image{color: {144, 1, 80}, hex: [144, 1, 80, 152,\
       60, 210, 79, 176, 214, 150, 63, 125, 40, 225, 127, 114]}
       iex> Identicon.build_grid(image)
-      [[144, 1, 80], [152, 60, 210], [79, 176, 214], [150, 63, 125], [40, 225, 127]]
+      [
+      [144, 1, 80, 1, 144],
+      [152, 60, 210, 60, 152],
+      [79, 176, 214, 176, 79],
+      [150, 63, 125, 63, 150],
+      [40, 225, 127, 225, 40]
+      ]
   """
   def build_grid(image) do
     %Identicon.Image{hex: hex} = image
-    hex |> Enum.chunk(3)
+    hex |> Enum.chunk(3) |> Enum.map(&mirror_row/1)
+  end
+
+  def mirror_row(row) do
+    [first, second | _tail] = row
+    row ++ [second, first]
   end
 end
