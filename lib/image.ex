@@ -1,6 +1,6 @@
 defmodule Identicon.Image do
   @moduledoc """
-  Documentation for Identicon.
+  Documentation for Identicon.Image.
   """
 
   @doc """
