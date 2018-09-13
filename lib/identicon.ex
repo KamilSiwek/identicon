@@ -7,12 +7,12 @@ defmodule Identicon do
   Get string. Return list of hash.
 
   ## Examples
-
       iex> Identicon.main("abc")
-      [144, 1, 80, 152, 60, 210, 79,
-      176, 214, 150, 63, 125, 40,
-      225, 127, 114]
-
+      %Identicon.Image{
+        hex: [144, 1, 80, 152, 60,
+        210, 79, 176, 214, 150, 63,
+        125, 40, 225, 127, 114]
+      }
   """
   def main(input) do
     input |> hash_input
@@ -22,14 +22,16 @@ defmodule Identicon do
   Get string. Return list of hash.
 
   ## Examples
-
       iex> Identicon.main("abc")
-      [144, 1, 80, 152, 60, 210, 79,
-      176, 214, 150, 63, 125, 40,
-      225, 127, 114]
-
+      %Identicon.Image{
+        hex: [144, 1, 80, 152, 60,
+        210, 79, 176, 214, 150, 63,
+        125, 40, 225, 127, 114]
+      }
   """
   def hash_input(input) do
-    :crypto.hash(:md5, input) |> :binary.bin_to_list
+    hex = :crypto.hash(:md5, input) |> :binary.bin_to_list
+
+    %Identicon.Image{hex: hex}
   end
 end
