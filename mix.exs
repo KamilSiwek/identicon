@@ -7,7 +7,8 @@ defmodule Identicon.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      tool: Coverex.Task
     ]
   end
 
@@ -21,6 +22,8 @@ defmodule Identicon.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:coverex, "~> 1.4.10", only: :test},
+      {:ex_doc, "~> 0.12"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
