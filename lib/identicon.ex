@@ -77,6 +77,7 @@ defmodule Identicon do
     end
     %Identicon.Image{image | grid: grid}
   end
+  
   @doc """
   Returns data with pixel_map.
   """
